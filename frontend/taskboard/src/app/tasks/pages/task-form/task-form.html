@@ -1,0 +1,68 @@
+<h2>Dodaj zadanie</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="mb-3">
+    <label class="form-label">Tytuł</label>
+    <input type="text" class="form-control" formControlName="title">
+    <div class="text-danger" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+      <small *ngIf="form.get('title')?.errors?.['required']">Pole jest wymagane</small>
+      <small *ngIf="form.get('title')?.errors?.['minlength']">Min. 3 znaki</small>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Adres (opcjonalnie)</label>
+    <div class="input-group">
+      <input type="text" class="form-control" formControlName="address" placeholder="np. Kraków, Rynek Główny">
+      <button class="btn btn-outline-secondary" type="button" (click)="geocodeAddress()">Geokoduj</button>
+    </div>
+    <small class="text-muted">Możesz też kliknąć na mapie, aby ustawić lokalizację.</small>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="form-label">Szerokość (lat)</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="lat"
+        step="0.000001"
+        (change)="syncMarkerFromForm()"
+      >
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Długość (lng)</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="lng"
+        step="0.000001"
+        (change)="syncMarkerFromForm()"
+      >
+    </div>
+  </div>
+
+  <div class="map-wrapper mb-3">
+    <div #map class="task-map"></div>
+  </div>
+
+  <div class="alert alert-info py-2" *ngIf="statusMessage">
+    {{ statusMessage }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Priorytet</label>
+    <select class="form-select" formControlName="priority">
+      <option value="low">low</option>
+      <option value="medium">medium</option>
+      <option value="high">high</option>
+    </select>
+  </div>
+
+  <div class="form-check mb-3">
+    <input type="checkbox" class="form-check-input" formControlName="done" id="done">
+    <label class="form-check-label" for="done">Wykonane</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Zapisz</button>
+</form>

@@ -1,0 +1,17 @@
+backend/.venv
+frontend/taskboard/.angular
+frontend/taskboard/node_modules
+frontend/taskboard/dist
+frontend/taskboard/.vscode
+.DS_Store
+npm-debug.log
+yarn-error.log
+lerna-debug.log*
+.idea
+.vscode
+*.sublime-workspace
+*.sublime-project
+*.pyc
+__pycache__/
+backend/app/__pycache__/
+backend/tests/__pycache__/

@@ -1,0 +1,26 @@
+<header class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">TaskBoard</a>
+    <nav class="navbar-nav ms-auto">
+      <a class="nav-link" routerLink="/login" *ngIf="!auth.isLoggedIn()">Login</a>
+      <a class="nav-link" routerLink="/tasks" *ngIf="auth.isLoggedIn()">Tasks</a>
+      <a class="nav-link" routerLink="/tasks/new" *ngIf="auth.isLoggedIn()">Add task</a>
+      <button
+        type="button"
+        class="btn btn-outline-light ms-2"
+        (click)="logout()"
+        *ngIf="auth.isLoggedIn()"
+      >
+        Wyloguj
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="container mt-4">
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <p>&copy; 2026 IWWW Team Michał Grzesiewicz</p>
+</footer>
